@@ -1,4 +1,4 @@
-use rusqlite::Connection;
+use rusqlite::{params, Connection};
 use std::path::Path;
 
 pub mod types;
@@ -14,14 +14,14 @@ pub fn init_database(path: &str) {
                 username TEXT,
                 first_name TEXT NOT NULL,
                 last_name TEXT
-            )", &[]).unwrap();
+            )", params![]).unwrap();
 
         c.execute("CREATE TABLE spams (
                 message_id INTEGER PRIMARY KEY,
                 created DATE NOT NULL,
                 owner INTEGER NOT NULL,
                 FOREIGN KEY(owner) REFERENCES users(id)
-            )", &[]).unwrap();
+            )", params![]).unwrap();
 
         c.execute("CREATE TABLE spam_voters (
                 user_id INTEGER NOT NULL,
@@ -29,6 +29,6 @@ pub fn init_database(path: &str) {
                 PRIMARY KEY(user_id, spam_id),
                 FOREIGN KEY(user_id) REFERENCES users(id),
                 FOREIGN KEY(spam_id) REFERENCES spams(id)
-            )", &[]).unwrap();
+            )", params![]).unwrap();
     }
 }

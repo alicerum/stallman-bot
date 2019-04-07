@@ -8,7 +8,7 @@ telegram-bot = "0.6"
 tokio-core = "0.1.17"
 config = "0.7"
 futures = "0.1.21"
-rusqlite = "0.11.0"
+rusqlite = "0.17.0"
 
 serde = "1.0"
 serde_derive = "1.0.43"
